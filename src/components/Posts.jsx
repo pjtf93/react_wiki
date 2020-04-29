@@ -1,34 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Flex, Heading, Image } from '@chakra-ui/core';
 import { Link as ReactLink } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+
+const API = 'https://dry-beyond-85304.herokuapp.com/api/publicaciones';
 
 const Posts = () => {
-  const [posts, setPosts] = useState([
-    {
-      id: [],
-      title: [],
-      content: [],
-    },
-  ]);
-
-  useEffect(() => {
-    const url = new URL(
-      'https://dry-beyond-85304.herokuapp.com/api/publicaciones'
-    );
-
-    let headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
-
-    fetch(url, {
-      method: 'GET',
-      headers: headers,
-    })
-      .then((response) => response.json())
-      .then((json) => setPosts(json.data));
-  }, []);
-  console.log(posts);
+  const initialState = useFetch(API);
 
   return (
     <Flex
@@ -40,7 +18,7 @@ const Posts = () => {
     >
       <Heading>The Latest</Heading>
 
-      {posts.map((item) => (
+      {initialState.data.map((item) => (
         <Flex
           direction='column'
           h='50%'
