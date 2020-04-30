@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Flex, Heading, Image } from '@chakra-ui/core';
 import { Link as ReactLink } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
@@ -9,14 +9,10 @@ const Posts = () => {
   const initialState = useFetch(API);
 
   return (
-    <Flex
-      w='100%'
-      minH=''
-      justify='flex-start'
-      align='center'
-      direction='column'
-    >
-      <Heading>The Latest</Heading>
+    <Flex w='100%' justify='flex-start' align='center' direction='column'>
+      <Flex align='flex-start' w='50%'>
+        <Heading textAlign='left'>The Latest</Heading>
+      </Flex>
 
       {initialState.data.map((item) => (
         <Flex
@@ -26,21 +22,33 @@ const Posts = () => {
           align='stretch'
           justify='space-around'
           shadow='md'
-          mt={6}
+          my={10}
         >
-          <Image src='https://picsum.photos/200' />
+          <Image src='https://picsum.photos/600/600?random' />
 
           <Heading
             as={ReactLink}
             to={{ pathname: `/post/${item.id}` }}
-            key={item.title}
+            size='xl'
+            my={3}
+            ml={3}
           >
             {item.title}
           </Heading>
-          <Heading as='h4' size='sm' key={item.content}>
+
+          <Heading as='h4' size='sm' key={item.content} m={5}>
             {item.content}
           </Heading>
-          <ReactLink to='/Post'> Continuar leyendo</ReactLink>
+
+          <Heading
+            as={ReactLink}
+            to={{ pathname: `/post/${item.id}` }}
+            size='xs'
+            textAlign='right'
+            m={3}
+          >
+            Keep reading
+          </Heading>
         </Flex>
       ))}
     </Flex>

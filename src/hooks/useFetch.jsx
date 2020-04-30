@@ -5,7 +5,7 @@ const useFetch = (API) => {
     data: [
       {
         id: '',
-        title: '.',
+        title: '',
         content: '',
         category_id: '',
         user_id: '',

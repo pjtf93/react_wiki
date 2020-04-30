@@ -1,10 +1,8 @@
 import React from 'react';
 import {
   Flex,
-  Image,
   Heading,
   Text,
-  Tag,
   Textarea,
   Box,
   Stack,
@@ -14,17 +12,25 @@ import {
 const Comments = () => {
   return (
     <>
-      <Flex as='form' flexDirection='column'>
+      <Flex as='form' flexDirection='column' my={5}>
         <Textarea placeholder='Place your comment here' />
-        <Button type='submit' variant='link'>
+        <Button type='submit' variant='link' my={2}>
           Enviar
         </Button>
       </Flex>
-      <Stack spacing={6}>
+      <Stack spacing={6} my={5}>
         <Box>
-          <Heading size='sm'>Nombre del que comenta</Heading>
-          <Text>Fecha del comentario</Text>
-          <Text>Comentario</Text>
+          <Heading size='lg' my={2}>
+            Comments
+          </Heading>
+
+          <Heading size='sm' my={2}>
+            Nombre del que comenta
+          </Heading>
+
+          <Text my={2}>Fecha del comentario</Text>
+
+          <Text my={2}>Comentario</Text>
         </Box>
       </Stack>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Flex, Heading, Image } from '@chakra-ui/core';
 import { Link as ReactLink } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
@@ -10,20 +10,27 @@ const MostReads = () => {
 
   return (
     <Flex w='20%' direction='column' align='center' justify='flex-start' mr={6}>
-      <Heading as='h3' size='md'>
+      <Heading as='h3' size='md' my={3}>
         Popular Now
       </Heading>
       {initialState.data.map((item) => (
         <Flex
           direction='column'
-          h='30%'
-          w='100%'
+          h={64}
+          w='80%'
           justify='space-around'
           align='stretch'
           shadow='md'
+          my={5}
         >
-          <Image h='100px' w='100%' />
-          <Heading as={ReactLink} to='/Post' textAlign='center'>
+          <Image src='https://picsum.photos/300/200?random=1' />
+          <Heading
+            as={ReactLink}
+            to={{ pathname: `/post/${item.id}` }}
+            size='sm'
+            textAlign='center'
+            key={item.id}
+          >
             {item.title}
           </Heading>
         </Flex>
