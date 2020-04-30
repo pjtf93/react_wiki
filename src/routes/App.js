@@ -7,6 +7,8 @@ import NotFound from '../containers/NotFound';
 import Login from '../containers/Login';
 import SignUp from '../containers/SignUp';
 import Post from '../containers/Post';
+import MyPosts from '../components/MyPosts';
+import CreatePost from '../components/CreatePost';
 
 const App = () => (
   <BrowserRouter>
@@ -14,8 +16,11 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/post/:id' component={Post} />
-        <Route exact path='/Login' component={Login} />
-        <Route exact path='/SignUp' component={SignUp} />
+        <Route path='/post/:category_id' component={Post} />
+        <Route exact path='/myposts' component={MyPosts} />
+        <Route exact path='/newpost' component={CreatePost} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={SignUp} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

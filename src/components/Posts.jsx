@@ -3,10 +3,11 @@ import { Flex, Heading, Image } from '@chakra-ui/core';
 import { Link as ReactLink } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
-const API = 'https://dry-beyond-85304.herokuapp.com/api/publicaciones';
-
 const Posts = () => {
+  const API = 'https://dry-beyond-85304.herokuapp.com/api/publicaciones';
   const initialState = useFetch(API);
+
+  // Deberia haber una logica que escoja al api si existe la categoria o
 
   return (
     <Flex w='100%' justify='flex-start' align='center' direction='column'>

@@ -20,7 +20,7 @@ const CompletePost = ({ id }) => {
           Autor
         </Text>
         <Text>{initialState.created_at}</Text>
-        <Tag ml={5}>Categoria</Tag>
+        <Tag ml={5}>{initialState.category_id}</Tag>
       </Flex>
       <Heading textAlign='justify' my={5}>
         {initialState.title}
