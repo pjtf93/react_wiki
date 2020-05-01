@@ -9,6 +9,7 @@ import SignUp from '../containers/SignUp';
 import Post from '../containers/Post';
 import MyPosts from '../components/MyPosts';
 import CreatePost from '../components/CreatePost';
+import ModifyPost from '../components/ModifyPost';
 
 const App = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => (
         <Route path='/post/:category_id' component={Post} />
         <Route exact path='/myposts' component={MyPosts} />
         <Route exact path='/newpost' component={CreatePost} />
+        <Route exact path='/modifypost' component={ModifyPost} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={SignUp} />
         <Route component={NotFound} />

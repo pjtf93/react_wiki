@@ -19,7 +19,7 @@ const Post = ({ match }) => {
     >
       <Flex
         width='50%'
-        height='100%'
+        height=''
         flexDirection='column'
         justifyContent='space-between'
         alignItems='stretch'

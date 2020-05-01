@@ -10,7 +10,13 @@ const Posts = () => {
   // Deberia haber una logica que escoja al api si existe la categoria o
 
   return (
-    <Flex w='100%' justify='flex-start' align='center' direction='column'>
+    <Flex
+      w='100%'
+      h='100%'
+      justify='flex-start'
+      align='center'
+      direction='column'
+    >
       <Flex align='flex-start' w='50%'>
         <Heading textAlign='left'>The Latest</Heading>
       </Flex>

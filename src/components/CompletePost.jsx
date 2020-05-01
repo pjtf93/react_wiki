@@ -14,7 +14,7 @@ const CompletePost = ({ id }) => {
           width='auto'
           textAlign='justify'
           display='flex'
-          height='auto'
+          height='full'
           mr={5}
         >
           Autor
