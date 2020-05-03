@@ -10,6 +10,7 @@ import Post from '../containers/Post';
 import MyPosts from '../components/MyPosts';
 import CreatePost from '../components/CreatePost';
 import UpdatePost from '../components/UpdatePost';
+import CategoriesPosts from '../containers/CategoriesPosts';
 
 const App = () => (
   <BrowserRouter>
@@ -17,7 +18,7 @@ const App = () => (
       <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/post/:id' component={Post} />
-        <Route path='/post/:category_id' component={Post} />
+        <Route path='/categories/:id' component={CategoriesPosts} />
         <Route exact path='/myposts' component={MyPosts} />
         <Route exact path='/newpost' component={CreatePost} />
         <Route exact path='/updatepost/:id' component={UpdatePost} />

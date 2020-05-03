@@ -13,29 +13,30 @@ const MostReads = () => {
       <Heading as='h3' size='md' my={3}>
         Popular Now
       </Heading>
-      {initialState.data.map((item) => (
-        <Flex
-          direction='column'
-          h={64}
-          w='80%'
-          justify='space-around'
-          align='stretch'
-          shadow='md'
-          my={5}
-          key={item.id}
-        >
-          <Image src='https://picsum.photos/300/200?random=1' />
-          <Heading
-            as={ReactLink}
-            to={{ pathname: `/post/${item.id}` }}
-            size='sm'
-            textAlign='center'
+      {initialState.data &&
+        initialState.data.map((item) => (
+          <Flex
+            direction='column'
+            h={64}
+            w='80%'
+            justify='space-around'
+            align='stretch'
+            shadow='md'
+            my={5}
             key={item.id}
           >
-            {item.title}
-          </Heading>
-        </Flex>
-      ))}
+            <Image src='https://picsum.photos/300/200?random=1' />
+            <Heading
+              as={ReactLink}
+              to={{ pathname: `/post/${item.id}` }}
+              size='sm'
+              textAlign='center'
+              key={item.id}
+            >
+              {item.title}
+            </Heading>
+          </Flex>
+        ))}
     </Flex>
   );
 };

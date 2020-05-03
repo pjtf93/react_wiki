@@ -1,50 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const useFetch = (API) => {
-  const [data, setData] = useState({
-    id: '',
-    title: '',
-    content: '',
-    created_at: '',
-    updated_at: '',
-    deleted_at: null,
-    category: {
-      id: '',
-      name: '.',
-      parent_id: null,
-      created_at: '',
-      updated_at: '',
-      deleted_at: null,
-    },
-    comments: [
-      {
-        id: '',
-        content: 'unde',
-        created_at: '',
-        updated_at: '',
-        deleted_at: null,
-      },
-    ],
-    tags: [
-      {
-        id: '',
-        name: '',
-        created_at: '',
-        updated_at: '',
-        deleted_at: null,
-      },
-    ],
-    user: {
-      id: '',
-      first_name: '',
-      last_name: '',
-      email: '',
-      email_verified_at: '',
-      created_at: '',
-      updated_at: '',
-      deleted_at: null,
-    },
-  });
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     let headers = {

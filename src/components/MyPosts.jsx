@@ -42,38 +42,39 @@ const MyPosts = () => {
           />
         </Flex>
 
-        {initialState.data.map((item) => (
-          <Flex
-            alignItems='center'
-            justifyContent='space-between'
-            my={5}
-            shadow='md'
-            p={5}
-            key={item.id}
-          >
-            <Heading size='md'>{item.title}</Heading>
-            <Flex>
-              <Button
-                as={ReactLink}
-                to={{ pathname: `/updatepost/${item.id}` }}
-                variantColor='blue'
-                size='xs'
-                mx={1}
-              >
-                Modify
-              </Button>
-              <Button
-                variant='solid'
-                variantColor='red'
-                size='xs'
-                mx={1}
-                onClick={() => handleClick(item.id)}
-              >
-                Delete
-              </Button>
+        {initialState.data &&
+          initialState.data.map((item) => (
+            <Flex
+              alignItems='center'
+              justifyContent='space-between'
+              my={5}
+              shadow='md'
+              p={5}
+              key={item.id}
+            >
+              <Heading size='md'>{item.title}</Heading>
+              <Flex>
+                <Button
+                  as={ReactLink}
+                  to={{ pathname: `/updatepost/${item.id}` }}
+                  variantColor='blue'
+                  size='xs'
+                  mx={1}
+                >
+                  Modify
+                </Button>
+                <Button
+                  variant='solid'
+                  variantColor='red'
+                  size='xs'
+                  mx={1}
+                  onClick={() => handleClick(item.id)}
+                >
+                  Delete
+                </Button>
+              </Flex>
             </Flex>
-          </Flex>
-        ))}
+          ))}
       </Flex>
     </Flex>
   );

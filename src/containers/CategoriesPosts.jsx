@@ -1,10 +1,12 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/core';
-import Posts from './Posts';
-import MostReads from './MostReads';
+import Posts from '../components/Posts';
 
-const Content = () => {
-  const API = 'https://dry-beyond-85304.herokuapp.com/api/publicaciones';
+const CategoriesPosts = ({ match }) => {
+  const {
+    params: { id },
+  } = match;
+  const API = `https://dry-beyond-85304.herokuapp.com/api/categorias/${id}`;
 
   return (
     <Flex
@@ -15,9 +17,8 @@ const Content = () => {
       mt={10}
     >
       <Posts API={API} />
-      <MostReads />
     </Flex>
   );
 };
 
-export default Content;
+export default CategoriesPosts;

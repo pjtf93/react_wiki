@@ -9,23 +9,29 @@ const CompletePost = ({ id }) => {
   return (
     <>
       <Image src='https://picsum.photos/600/600?random' />
-      <Flex flexDirection='row' justify='center' align='center' my={5}>
-        <Text
-          width='auto'
-          textAlign='justify'
-          display='flex'
-          height='full'
-          mr={5}
-        ></Text>
-        <Text>{initialState.created_at}</Text>
-        <Tag ml={5}>{initialState.category_id}</Tag>
-      </Flex>
-      <Heading textAlign='justify' my={5}>
-        {initialState.title}
-      </Heading>
-      <Text height='30%' my={5}>
-        {initialState.content}
-      </Text>
+      {initialState.user && (
+        <>
+          <Flex flexDirection='row' justify='center' align='center' my={5}>
+            <Text
+              width='auto'
+              textAlign='justify'
+              display='flex'
+              height='full'
+              mr={5}
+            >
+              {initialState.user.first_name} {initialState.user.last_name}
+            </Text>
+            <Text>{initialState.created_at}</Text>
+            <Tag ml={5}>{initialState.category.name}</Tag>
+          </Flex>
+          <Heading textAlign='justify' my={5}>
+            {initialState.title}
+          </Heading>
+          <Text height='30%' my={5}>
+            {initialState.content}
+          </Text>
+        </>
+      )}
     </>
   );
 };
