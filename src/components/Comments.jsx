@@ -14,10 +14,10 @@ const Comments = ({ id }) => {
   const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
   const initialState = useFetch(API);
 
-  console.log(initialState.comments);
-
-  /*  const list = initialState.comments.map
-  const  */
+  const list = initialState.comments.map((item) => {
+    return item.id;
+  });
+  console.log(list);
 
   return (
     <>
@@ -32,17 +32,15 @@ const Comments = ({ id }) => {
           <Heading size='lg' my={2}>
             Comments
           </Heading>
-          {initialState.comments.map((item) => (
+          {/*           {initialState.data.map((item) => (
             <>
-              <Heading size='sm' my={2}>
-                {item.id}
-              </Heading>
+              <Heading size='sm' my={2}></Heading>
 
               <Text my={2}>Fecha del comentario</Text>
 
               <Text my={2}>Comentario</Text>
             </>
-          ))}
+          ))} */}
         </Box>
       </Stack>
     </>
