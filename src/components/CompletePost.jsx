@@ -16,9 +16,7 @@ const CompletePost = ({ id }) => {
           display='flex'
           height='full'
           mr={5}
-        >
-          Autor
-        </Text>
+        ></Text>
         <Text>{initialState.created_at}</Text>
         <Tag ml={5}>{initialState.category_id}</Tag>
       </Flex>

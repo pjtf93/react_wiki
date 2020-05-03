@@ -30,6 +30,7 @@ const Posts = () => {
           justify='space-around'
           shadow='md'
           my={10}
+          key={item.id}
         >
           <Image src='https://picsum.photos/600/600?random' />
 

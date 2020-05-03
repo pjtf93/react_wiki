@@ -22,6 +22,7 @@ const MostReads = () => {
           align='stretch'
           shadow='md'
           my={5}
+          key={item.id}
         >
           <Image src='https://picsum.photos/300/200?random=1' />
           <Heading

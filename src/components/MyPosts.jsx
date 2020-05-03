@@ -49,12 +49,13 @@ const MyPosts = () => {
             my={5}
             shadow='md'
             p={5}
+            key={item.id}
           >
             <Heading size='md'>{item.title}</Heading>
             <Flex>
               <Button
                 as={ReactLink}
-                to={{ pathname: `/modifypost/${item.id}` }}
+                to={{ pathname: `/updatepost/${item.id}` }}
                 variantColor='blue'
                 size='xs'
                 mx={1}

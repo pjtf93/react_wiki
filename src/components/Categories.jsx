@@ -12,16 +12,17 @@ const Categories = () => {
       method: 'GET',
     })
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => setData(data.data));
   }, []);
 
   return (
     <Flex justify='center' align='center' h={20} bg='black' color='white'>
-      {data.map((item) => (
+      {data.map((item, id) => (
         <Heading
           as={ReactLink}
           to={{ pathname: `/post/${item.id}` }}
           mx={2}
+          key={id}
           size='md'
         >
           {`#${item.name}`}

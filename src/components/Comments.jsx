@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import useFetch from '../hooks/useFetch';
 import {
   Flex,
   Heading,
@@ -9,7 +10,15 @@ import {
   Button,
 } from '@chakra-ui/core';
 
-const Comments = () => {
+const Comments = ({ id }) => {
+  const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
+  const initialState = useFetch(API);
+
+  console.log(initialState.comments);
+
+  /*  const list = initialState.comments.map
+  const  */
+
   return (
     <>
       <Flex as='form' flexDirection='column' my={5}>
@@ -23,14 +32,17 @@ const Comments = () => {
           <Heading size='lg' my={2}>
             Comments
           </Heading>
+          {initialState.comments.map((item) => (
+            <>
+              <Heading size='sm' my={2}>
+                {item.id}
+              </Heading>
 
-          <Heading size='sm' my={2}>
-            Nombre del que comenta
-          </Heading>
+              <Text my={2}>Fecha del comentario</Text>
 
-          <Text my={2}>Fecha del comentario</Text>
-
-          <Text my={2}>Comentario</Text>
+              <Text my={2}>Comentario</Text>
+            </>
+          ))}
         </Box>
       </Stack>
     </>

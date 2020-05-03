@@ -25,7 +25,7 @@ const Post = ({ match }) => {
         alignItems='stretch'
       >
         <CompletePost id={id} />
-        <Comments />
+        <Comments id={id} />
       </Flex>
     </Flex>
   );
