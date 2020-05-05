@@ -11,7 +11,8 @@ import {
   FormControl,
 } from '@chakra-ui/core';
 
-const API = 'https://dry-beyond-85304.herokuapp.com/api/publicaciones';
+const API = 'https://dry-beyond-85304.herokuapp.com/api/categorias';
+const API2 = `https://dry-beyond-85304.herokuapp.com/api/publicaciones`;
 
 const CreatePost = () => {
   const initialState = useFetch(API);
@@ -33,14 +34,14 @@ const CreatePost = () => {
       user_id: setUser,
     };
 
-    fetch(API, {
+    fetch(API2, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({ title, content, category_id, user_id }),
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
-    console.log(body);
+    console.log({ title, content, category_id, user_id });
   };
 
   return (
@@ -98,9 +99,12 @@ const CreatePost = () => {
             placeholder='Select category'
             onChange={(e) => setCategory(e.currentTarget.value)}
           >
-            {initialState.data.map((item) => (
-              <option value={category_id}>{item.category_id}</option>
-            ))}
+            {initialState.data &&
+              initialState.data.map((item, id) => (
+                <option key={id} value={item.id}>
+                  {item.id}
+                </option>
+              ))}
           </Select>
         </Flex>
         <Button type='submit' my={5}>

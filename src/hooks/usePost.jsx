@@ -9,7 +9,7 @@ const usePost = (API, datos) => {
     fetch(API, {
       method: 'POST',
       headers: headers,
-      body: datos,
+      body: JSON.stringify(datos),
     })
       .then((response) => response.json())
       .then((json) => console.log(json));

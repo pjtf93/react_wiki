@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import {
   Flex,
@@ -12,17 +12,43 @@ import {
 
 const Comments = ({ id }) => {
   const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
+  const API2 = `https://dry-beyond-85304.herokuapp.com/api/comentarios`;
   const initialState = useFetch(API);
+  const [content, setContent] = useState('');
+  const [user_id, setUser] = useState('1');
 
-  /*  const list = initialState.comments.map((item) => {
-    return item.id;
-  }); */
-  console.log(initialState.comments);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let headers = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+    let body = {
+      content: content,
+      post_id: id,
+      user_id: user_id,
+    };
+
+    fetch(API2, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
+    console.log(JSON.stringify(body));
+  };
 
   return (
     <>
-      <Flex as='form' flexDirection='column' my={5}>
-        <Textarea placeholder='Place your comment here' />
+      <Flex as='form' flexDirection='column' my={5} onSubmit={handleSubmit}>
+        <Textarea
+          placeholder='Place your comment here'
+          type='text'
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+        />
+
         <Button type='submit' variant='link' my={2}>
           Enviar
         </Button>

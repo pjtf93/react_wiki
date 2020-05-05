@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, Image, Heading, Text, Tag } from '@chakra-ui/core';
 import useFetch from '../hooks/useFetch';
+import { Link as ReactLink } from 'react-router-dom';
 
 const CompletePost = ({ id }) => {
   const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
@@ -22,7 +23,13 @@ const CompletePost = ({ id }) => {
               {initialState.user.first_name} {initialState.user.last_name}
             </Text>
             <Text>{initialState.created_at}</Text>
-            <Tag ml={5}>{initialState.category.name}</Tag>
+            <Tag
+              as={ReactLink}
+              to={{ pathname: `/categories/${initialState.category.id}` }}
+              ml={5}
+            >
+              {initialState.category.name}
+            </Tag>
           </Flex>
           <Heading textAlign='justify' my={5}>
             {initialState.title}
