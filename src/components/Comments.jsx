@@ -8,12 +8,14 @@ import {
   Box,
   Stack,
   Button,
+  Spinner,
 } from '@chakra-ui/core';
 
 const Comments = ({ id }) => {
   const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
   const API2 = `https://dry-beyond-85304.herokuapp.com/api/comentarios`;
-  const initialState = useFetch(API);
+  const [{ data, isLoading }] = useFetch(API);
+
   const [content, setContent] = useState('');
   const [user_id, setUser] = useState('1');
 
@@ -58,8 +60,13 @@ const Comments = ({ id }) => {
           <Heading size='lg' my={2}>
             Comments
           </Heading>
-          {initialState.comments &&
-            initialState.comments.map((item) => (
+          {isLoading ? (
+            <>
+              <Spinner size='xl' />
+            </>
+          ) : (
+            data.comments &&
+            data.comments.map((item) => (
               <Fragment key={item.id}>
                 <Heading size='sm' my={2}>
                   {item.id}
@@ -69,7 +76,8 @@ const Comments = ({ id }) => {
 
                 <Text my={2}>{item.content}</Text>
               </Fragment>
-            ))}
+            ))
+          )}
         </Box>
       </Stack>
     </>

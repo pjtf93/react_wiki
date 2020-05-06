@@ -1,12 +1,12 @@
 import React from 'react';
-import { Flex, Heading, Button, IconButton } from '@chakra-ui/core';
+import { Flex, Heading, Button, IconButton, Spinner } from '@chakra-ui/core';
 import { Link as ReactLink } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
 const API = 'https://dry-beyond-85304.herokuapp.com/api/publicaciones';
 
 const MyPosts = () => {
-  const initialState = useFetch(API);
+  const [{ data, isLoading }] = useFetch(API);
 
   const handleClick = (item) => {
     console.log(item);
@@ -42,8 +42,13 @@ const MyPosts = () => {
           />
         </Flex>
 
-        {initialState.data &&
-          initialState.data.map((item) => (
+        {isLoading ? (
+          <>
+            <Spinner size='xl' />
+          </>
+        ) : (
+          data.data &&
+          data.data.map((item) => (
             <Flex
               alignItems='center'
               justifyContent='space-between'
@@ -74,7 +79,8 @@ const MyPosts = () => {
                 </Button>
               </Flex>
             </Flex>
-          ))}
+          ))
+        )}
       </Flex>
     </Flex>
   );

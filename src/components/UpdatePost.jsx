@@ -17,7 +17,8 @@ const UpdatePost = ({ match }) => {
     params: { id },
   } = match;
   const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
-  const initialState = useFetch(API);
+  const [{ data, isLoading }] = useFetch(API);
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category_id, setCategory] = useState();
@@ -76,7 +77,7 @@ const UpdatePost = ({ match }) => {
             <EditablePreview />
 
             <EditableInput
-              defaultValue={initialState.title}
+              defaultValue={data.title}
               onChange={(event) => setTitle(event.target.value)}
             />
           </Editable>
@@ -99,7 +100,7 @@ const UpdatePost = ({ match }) => {
             value={content}
             onChange={(event) => setContent(event.target.value)}
           >
-            {initialState.content}
+            {data.content}
           </Editable>
         </Flex>
         <Flex direction='column' w='md' justify='flex-start' align='stretch'>
@@ -111,7 +112,9 @@ const UpdatePost = ({ match }) => {
             placeholder='Select category'
             onChange={(e) => setCategory(e.currentTarget.value)}
           >
-            <option value={category_id}>{initialState.category_id}</option>
+            {data.category && (
+              <option value={category_id}>{data.category.id}</option>
+            )}
           </Select>
         </Flex>
         <Button type='submit' my={5}>
