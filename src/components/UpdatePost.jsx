@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 
 import {
@@ -17,7 +17,7 @@ const UpdatePost = ({ match }) => {
     params: { id },
   } = match;
   const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
-  const [{ data, isLoading }] = useFetch(API);
+  const [{ data }] = useFetch(API);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -44,10 +44,13 @@ const UpdatePost = ({ match }) => {
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
-    console.log(body);
+    console.log(title, content, category_id, user_id);
   };
 
-  console.log(title);
+  useEffect(() => {
+    setTitle(data.title);
+    setContent(data.content);
+  }, [data]);
 
   return (
     <Flex w='100%' direction='column' align='center' justify='flex-start'>
@@ -68,40 +71,40 @@ const UpdatePost = ({ match }) => {
           <Heading size='md' mb={3} mt={3}>
             Titulo
           </Heading>
-          <Editable
-            isFullw
-            placeholder='Titulo'
-            type='text'
-            startWithEditView='true'
-          >
-            <EditablePreview />
-
-            <EditableInput
-              defaultValue={data.title}
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </Editable>
+          {title && (
+            <Editable
+              isFullw
+              placeholder='Titulo'
+              type='text'
+              defaultValue={title}
+            >
+              <EditablePreview />
+              <EditableInput
+                value={title}
+                onChange={(event) => setTitle(event.target.value)}
+              />
+            </Editable>
+          )}
         </Flex>
-        <Flex
-          direction='column'
-          w='md'
-          h='xs'
-          justify='flex-start'
-          align='stretch'
-        >
+        <Flex direction='column' w='md' justify='flex-start' align='stretch'>
           <Heading size='md' mb={3} mt={3}>
             Contenido
           </Heading>
-          <Editable
-            resize='vertical'
-            h='full'
-            placeholder='Contenido'
-            type='text'
-            value={content}
-            onChange={(event) => setContent(event.target.value)}
-          >
-            {data.content}
-          </Editable>
+          {content && (
+            <Editable
+              resize='vertical'
+              h='full'
+              placeholder='Contenido'
+              defaultValue={content}
+              type='text'
+            >
+              <EditablePreview />
+              <EditableInput
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
+              />
+            </Editable>
+          )}
         </Flex>
         <Flex direction='column' w='md' justify='flex-start' align='stretch'>
           <Heading size='md' mb={3} mt={3}>
