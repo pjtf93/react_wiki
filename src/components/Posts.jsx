@@ -32,7 +32,7 @@ const Posts = ({ API }) => {
           </>
         ) : (
           <>
-            {(data.data &&
+            {data.data &&
               data.data.map((item) => (
                 <Flex
                   direction='column'
@@ -57,7 +57,7 @@ const Posts = ({ API }) => {
                   </Heading>
 
                   <Heading as='h4' size='sm' key={item.content} m={5}>
-                    {item.content}
+                    {item.content.substring(0, 500)}
                   </Heading>
 
                   <Heading
@@ -70,46 +70,7 @@ const Posts = ({ API }) => {
                     Keep reading
                   </Heading>
                 </Flex>
-              ))) ||
-              (data.posts &&
-                data.posts.map((item) => (
-                  <Flex
-                    direction='column'
-                    h='50%'
-                    w='50%'
-                    align='stretch'
-                    justify='space-around'
-                    shadow='md'
-                    my={10}
-                    key={item.id}
-                  >
-                    <Image src='https://picsum.photos/600/600?random' />
-
-                    <Heading
-                      as={ReactLink}
-                      to={{ pathname: `/post/${item.id}` }}
-                      size='xl'
-                      my={3}
-                      ml={3}
-                    >
-                      {item.title}
-                    </Heading>
-
-                    <Heading as='h4' size='sm' key={item.content} m={5}>
-                      {item.content}
-                    </Heading>
-
-                    <Heading
-                      as={ReactLink}
-                      to={{ pathname: `/post/${item.id}` }}
-                      size='xs'
-                      textAlign='right'
-                      m={3}
-                    >
-                      Keep reading
-                    </Heading>
-                  </Flex>
-                )))}
+              ))}
           </>
         )}
       </Flex>

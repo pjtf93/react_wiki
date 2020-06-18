@@ -11,6 +11,7 @@ import MyPosts from '../components/MyPosts';
 import CreatePost from '../components/CreatePost';
 import UpdatePost from '../components/UpdatePost';
 import CategoriesPosts from '../containers/CategoriesPosts';
+import { PostsList } from '../features/posts/PostsList';
 
 const App = () => (
   <BrowserRouter>
@@ -24,6 +25,7 @@ const App = () => (
         <Route exact path='/updatepost/:id' component={UpdatePost} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/signup' component={SignUp} />
+        <Route exact path='/test' component={PostsList} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
