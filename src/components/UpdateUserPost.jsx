@@ -4,7 +4,6 @@ import {
   Flex,
   Heading,
   Button,
-  Select,
   Editable,
   FormControl,
   EditableInput,
@@ -21,18 +20,16 @@ const UpdateUserPost = ({ match }) => {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [category_id, setCategory] = useState();
 
   const dispatch = useDispatch();
 
   const post = useSelector((state) => selectPostById(state, postId));
-  // const categories = useSelector((state) => state.categories.categories);
+
   const postStatus = useSelector((state) => state.posts.status);
   const categoriesStatus = useSelector((state) => state.categories.status);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
-  // const onCategoryChanged = (e) => setCategory(e.target.value);
 
   const handleSubmit = async () => {
     try {
@@ -47,17 +44,10 @@ const UpdateUserPost = ({ match }) => {
       unwrapResult(updateAction);
       setTitle('');
       setContent('');
-      // setCategory('');
     } catch (err) {
       console.error('Failed to save the post: ', err);
     }
   };
-
-  /*  const categoryOptions = categories.map((category) => (
-    <option key={category.id} value={category.id}>
-      {category.name}
-    </option>
-  )); */
 
   return (
     <Flex w='100%' direction='column' align='center' justify='flex-start'>
@@ -109,19 +99,7 @@ const UpdateUserPost = ({ match }) => {
               <EditableInput value={content} onChange={onContentChanged} />
             </Editable>
           </Flex>
-          {/*         <Flex direction='column' w='md' justify='flex-start' align='stretch'>
-            <Heading size='md' mb={3} mt={3}>
-              Categoria
-            </Heading>
-            <Select
-              icon='chevron-down'
-              placeholder='Select category'
-              defaultValue={post.category.name}
-              onChange={onCategoryChanged}
-            >
-              {categoryOptions}
-            </Select>
-          </Flex> */}
+
           <Button type='button' my={5} onClick={handleSubmit}>
             Enviar
           </Button>

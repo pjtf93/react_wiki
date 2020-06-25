@@ -28,7 +28,7 @@ const CompletePost = ({ postId }) => {
               height='full'
               mr={5}
             >
-              {post.user.first_name} {post.user.last_name}
+              By {post.user.first_name} {post.user.last_name}
             </Text>
             <Text>{post.created_at}</Text>
             <Tag

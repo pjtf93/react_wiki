@@ -1,35 +1,40 @@
 import React, { useState } from 'react';
 import { Flex, Heading, FormControl, Input, Button } from '@chakra-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { addNewUser } from '../features/users/usersSlice';
 
-const API = 'https://dry-beyond-85304.herokuapp.com/api/usuarios';
-
-const Register = () => {
+const CreateUserForm = () => {
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
-    let body = {
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      password: password,
-    };
+  const dispatch = useDispatch();
 
-    fetch(API, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({ first_name, last_name, email, password }),
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-    console.log(body);
+  const onFirstNameChanged = (e) => setFirstName(e.target.value);
+  const onLastNameChanged = (e) => setLastName(e.target.value);
+  const onEmailChanged = (e) => setEmail(e.target.value);
+  const onPasswordChanged = (e) => setPassword(e.target.value);
+
+  const handleSubmitUser = async () => {
+    try {
+      const resultUser = await dispatch(
+        addNewUser({
+          first_name,
+          last_name,
+          email,
+          password,
+        })
+      );
+      unwrapResult(resultUser);
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPassword('');
+    } catch (err) {
+      console.error('Failed to save the post: ', err);
+    }
   };
 
   return (
@@ -45,7 +50,7 @@ const Register = () => {
       <Flex h='15%' justify='center' p={4}>
         <Heading>Create an Account</Heading>
       </Flex>
-      <Flex as='form' direction='column' h='70%' onSubmit={handleSubmit}>
+      <Flex as='form' direction='column' h='70%'>
         <FormControl
           h='100%'
           isRequired
@@ -58,31 +63,33 @@ const Register = () => {
             placeholder='Nombre'
             type='text'
             value={first_name}
-            onChange={(event) => setFirstName(event.target.value)}
+            onChange={onFirstNameChanged}
           />
           <Input
             placeholder='Apellido'
             type='text'
             value={last_name}
-            onChange={(event) => setLastName(event.target.value)}
+            onChange={onLastNameChanged}
           />
           <Input
             placeholder='Email'
             type='email'
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={onEmailChanged}
           />
           <Input
             placeholder='Password'
             type='password'
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={onPasswordChanged}
           />
-          <Button type='submit'>Sign Up</Button>
+          <Button type='button' onClick={handleSubmitUser}>
+            Sign Up
+          </Button>
         </FormControl>
       </Flex>
     </Flex>
   );
 };
 
-export default Register;
+export default CreateUserForm;

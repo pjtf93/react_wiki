@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Flex } from '@chakra-ui/core';
 
-import Comments from '../components/Comments';
+import PostComments from '../components/PostComments';
 import SinglePostPage from '../components/SinglePagePost';
 
 const Post = ({ match }) => {
@@ -25,7 +25,7 @@ const Post = ({ match }) => {
         alignItems='stretch'
       >
         <SinglePostPage postId={postId} />
-        <Comments postId={postId} />
+        <PostComments postId={postId} />
       </Flex>
     </Flex>
   );

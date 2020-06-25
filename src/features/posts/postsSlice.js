@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { nanoid } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Fetch Thunk with createAsyncThunk
@@ -34,6 +33,18 @@ export const updatePost = createAsyncThunk(
   }
 );
 
+export const addNewComment = createAsyncThunk(
+  'posts/addNewComment',
+  async (data) => {
+    const response = await axios.post(
+      'https://dry-beyond-85304.herokuapp.com/api/comentarios',
+      data
+    );
+
+    return response.data;
+  }
+);
+
 export const deletePost = createAsyncThunk('posts/deletePost', async (item) => {
   const response = await axios.delete(
     `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${item}`
@@ -48,32 +59,7 @@ const postsSlice = createSlice({
     status: 'idle',
     error: null,
   },
-  reducers: {
-    postAdded: {
-      reducer(state, action) {
-        state.posts.push(action.payload);
-      },
-      prepare(title, content, userId) {
-        return {
-          payload: {
-            id: nanoid(),
-            date: new Date().toISOString(),
-            title,
-            content,
-            user: userId,
-          },
-        };
-      },
-    },
-    postUpdated(state, action) {
-      const { id, title, content } = action.payload;
-      const existingPost = state.posts.find((post) => post.id === id);
-      if (existingPost) {
-        existingPost.title = title;
-        existingPost.content = content;
-      }
-    },
-  },
+  reducers: {},
   extraReducers: {
     [fetchPosts.pending]: (state, action) => {
       state.status = 'loading';
@@ -101,6 +87,17 @@ const postsSlice = createSlice({
     },
     [deletePost.fulfilled]: (state, action) => {
       state.posts = state.posts.filter((post) => action.meta.arg !== post.id);
+    },
+    [addNewComment.fulfilled]: (state, action) => {
+      const existingPost = state.posts.find(
+        (post) => post.id == action.meta.arg.post_id
+      );
+      if (existingPost) {
+        existingPost.comments.push(action.payload[0]);
+        console.log('comentario guardado ');
+      } else {
+        console.log('no se pudo guardar');
+      }
     },
   },
 });

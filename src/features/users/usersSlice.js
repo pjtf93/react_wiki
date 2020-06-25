@@ -7,6 +7,16 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   );
   return response.data.data;
 });
+export const addNewUser = createAsyncThunk('users/addNewUser', async (data) => {
+  const response = await axios.post(
+    'https://dry-beyond-85304.herokuapp.com/api/usuarios',
+    data
+  );
+
+  console.log(response.data[0]);
+  console.log(response.data.message);
+  return response.data[0];
+});
 
 const usersSlice = createSlice({
   name: 'users',
@@ -19,6 +29,9 @@ const usersSlice = createSlice({
   extraReducers: {
     [fetchUsers.fulfilled]: (state, action) => {
       state.users = state.users.concat(action.payload);
+    },
+    [addNewUser.fulfilled]: (state, action) => {
+      state.users.push(action.payload);
     },
   },
 });
