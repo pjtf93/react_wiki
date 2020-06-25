@@ -1,4 +1,4 @@
-const INITIAL_STATE = {
+/* const INITIAL_STATE = {
   users: [],
   loading: false,
   error: '',
@@ -19,3 +19,4 @@ export default (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+ */

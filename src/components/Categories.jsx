@@ -1,21 +1,21 @@
 import React from 'react';
 import { Flex, Heading, Spinner } from '@chakra-ui/core';
 import { Link as ReactLink } from 'react-router-dom';
-import useFetch from '../hooks/useFetch';
+
+import { useSelector } from 'react-redux';
 
 const Categories = () => {
-  const API = 'https://dry-beyond-85304.herokuapp.com/api/categorias';
-  const [{ data, isLoading }] = useFetch(API);
+  const categories = useSelector((state) => state.categories.categories);
 
   return (
     <Flex justify='center' align='center' h={20} bg='black' color='white'>
-      {isLoading ? (
+      {!categories ? (
         <>
           <Spinner size='xl' />
         </>
       ) : (
-        data.data &&
-        data.data.map((item) => (
+        categories &&
+        categories.map((item) => (
           <Heading
             as={ReactLink}
             to={{ pathname: `/categories/${item.id}` }}
@@ -23,7 +23,7 @@ const Categories = () => {
             key={item.id}
             size='md'
           >
-            {`#${item.name}`}
+            {`${item.name}`}
           </Heading>
         ))
       )}

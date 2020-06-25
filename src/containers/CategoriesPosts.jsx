@@ -1,12 +1,9 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/core';
-import Posts from '../components/Posts';
+import PostsList from '../components/PostsList';
 
 const CategoriesPosts = ({ match }) => {
-  const {
-    params: { id },
-  } = match;
-  const API = `https://dry-beyond-85304.herokuapp.com/api/categorias/${id}`;
+  const { categoriesId } = match.params;
 
   return (
     <Flex
@@ -16,7 +13,7 @@ const CategoriesPosts = ({ match }) => {
       direction='row'
       mt={10}
     >
-      <Posts API={API} />
+      <PostsList categoriesId={categoriesId} />
     </Flex>
   );
 };

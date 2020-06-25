@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import useFetch from '../hooks/useFetch';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import useFetch from '../hooks/useFetch';
 import {
   Flex,
   Heading,
@@ -11,15 +11,26 @@ import {
   FormControl,
 } from '@chakra-ui/core';
 
-const API = 'https://dry-beyond-85304.herokuapp.com/api/categorias';
-const API2 = `https://dry-beyond-85304.herokuapp.com/api/publicaciones`;
-
 const CreatePost = () => {
-  const initialState = useFetch(API);
+  // const initialState = useFetch(API);
+  const API2 = `https://dry-beyond-85304.herokuapp.com/api/publicaciones`;
+  const API = 'https://dry-beyond-85304.herokuapp.com/api/categorias';
+  const [initialState, setInitialState] = useState([]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category_id, setCategory] = useState();
   const [user_id, setUser] = useState('1');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get(API);
+      setInitialState(data.data);
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(initialState.data);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,12 +38,12 @@ const CreatePost = () => {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     };
-    let body = {
+    /*     let body = {
       title: setTitle,
       content: setContent,
       category_id: setCategory,
       user_id: setUser,
-    };
+    }; */
 
     fetch(API2, {
       method: 'POST',
@@ -43,6 +54,14 @@ const CreatePost = () => {
       .then((json) => console.log(json));
     console.log({ title, content, category_id, user_id });
   };
+
+  const categoryOptions =
+    initialState.data &&
+    initialState.data.map((item) => (
+      <option key={item.id} value={item.id}>
+        {item.id}
+      </option>
+    ));
 
   return (
     <Flex w='100%' direction='column' align='center' justify='flex-start'>
@@ -99,12 +118,7 @@ const CreatePost = () => {
             placeholder='Select category'
             onChange={(e) => setCategory(e.currentTarget.value)}
           >
-            {initialState.data &&
-              initialState.data.map((item, id) => (
-                <option key={id} value={item.id}>
-                  {item.id}
-                </option>
-              ))}
+            {categoryOptions}
           </Select>
         </Flex>
         <Button type='submit' my={5}>

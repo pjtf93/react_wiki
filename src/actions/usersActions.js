@@ -1,4 +1,4 @@
-import axios from 'axios';
+/* import axios from 'axios';
 
 export const getAllUsers = () => async (dispatch) => {
   dispatch({
@@ -20,3 +20,4 @@ export const getAllUsers = () => async (dispatch) => {
     });
   }
 };
+ */

@@ -1,4 +1,4 @@
-import axios from 'axios';
+/* import axios from 'axios';
 
 export const getAllPosts = () => async (dispatch) => {
   dispatch({
@@ -29,4 +29,4 @@ export const getPostById = () => async (dispatch) => {
     type: 'GET_POST_BY_ID',
     payload: response.data,
   });
-};
+}; */

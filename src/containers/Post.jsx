@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { Flex } from '@chakra-ui/core';
-import CompletePost from '../components/CompletePost';
+
 import Comments from '../components/Comments';
+import SinglePostPage from '../components/SinglePagePost';
 
 const Post = ({ match }) => {
-  const {
-    params: { id },
-  } = match;
+  const { postId } = match.params;
+
   return (
     <Flex
       height='100vh'
@@ -24,8 +24,8 @@ const Post = ({ match }) => {
         justifyContent='space-between'
         alignItems='stretch'
       >
-        <CompletePost id={id} />
-        <Comments id={id} />
+        <SinglePostPage postId={postId} />
+        <Comments postId={postId} />
       </Flex>
     </Flex>
   );

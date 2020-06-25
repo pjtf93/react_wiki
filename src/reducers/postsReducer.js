@@ -1,4 +1,4 @@
-const INITIAL_STATE = {
+/* const INITIAL_STATE = {
   posts: [],
   loading: false,
   error: '',
@@ -18,4 +18,4 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
-};
+}; */

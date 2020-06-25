@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import useFetch from '../hooks/useFetch';
+// import useFetch from '../hooks/useFetch';
 import {
   Flex,
   Heading,
@@ -11,10 +11,15 @@ import {
   Spinner,
 } from '@chakra-ui/core';
 
-const Comments = ({ id }) => {
-  const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
-  const API2 = `https://dry-beyond-85304.herokuapp.com/api/comentarios`;
-  const [{ data, isLoading }] = useFetch(API);
+import { useSelector } from 'react-redux';
+
+const Comments = ({ postId }) => {
+  // const API = `https://dry-beyond-85304.herokuapp.com/api/publicaciones/${id}`;
+  // const API2 = `https://dry-beyond-85304.herokuapp.com/api/comentarios`;
+  // const [{ data, isLoading }] = useFetch(API);
+  const post = useSelector((state) =>
+    state.posts.posts.find((post) => post.id == postId)
+  );
 
   const [content, setContent] = useState('');
   const [user_id, setUser] = useState('1');
@@ -27,18 +32,18 @@ const Comments = ({ id }) => {
     };
     let body = {
       content: content,
-      post_id: id,
+      post_id: postId,
       user_id: user_id,
     };
 
-    fetch(API2, {
+    /* fetch(API2, {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
-    console.log(JSON.stringify(body));
+    console.log(JSON.stringify(body)); */
   };
 
   return (
@@ -60,20 +65,18 @@ const Comments = ({ id }) => {
           <Heading size='lg' my={2}>
             Comments
           </Heading>
-          {isLoading ? (
+          {!post ? (
             <>
               <Spinner size='xl' />
             </>
           ) : (
-            data.comments &&
-            data.comments.map((item) => (
+            post.comments &&
+            post.comments.map((item) => (
               <Fragment key={item.id}>
                 <Heading size='sm' my={2}>
                   {item.id}
                 </Heading>
-
                 <Text my={2}>{item.created_at}</Text>
-
                 <Text my={2}>{item.content}</Text>
               </Fragment>
             ))
