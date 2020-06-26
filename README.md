@@ -1,3 +1,7 @@
+This project is a basic CRUD example using React, Redux and Chakra UI.
+
+https://react-wiki-nx9x735x1.vercel.app/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
